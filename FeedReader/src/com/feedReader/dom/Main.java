@@ -3,7 +3,7 @@
  * Create date: Oct 28, 2013
  * Create by: enixjin
  */
-package com.feedReader;
+package com.feedReader.dom;
 
 import java.io.IOException;
 
@@ -11,9 +11,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import com.feedReader.bean.Channel;
-import com.feedReader.bean.Feed;
-import com.feedReader.bean.Item;
+import com.feedReader.dom.bean.Channel;
+import com.feedReader.dom.bean.Feed;
+import com.feedReader.dom.bean.Item;
 
 /**
  * Class description goes here

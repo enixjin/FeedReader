@@ -3,7 +3,10 @@
  * Create date: Oct 28, 2013
  * Create by: enixjin
  */
-package com.feedReader.bean;
+package com.feedReader.dom.bean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -14,18 +17,20 @@ import org.w3c.dom.NodeList;
  * @author enixjin
  * 
  */
-public class Item {
+public class Channel {
+
+    public static String tagName = "channel";
 
     private String title = "";
     private String link = "";
     private String description = "";
-    private String pubDate = "";
+    private List<Item> items = new ArrayList<>();
 
     /**
-     * @param current
+     * 
      */
-    public Item(Node currentItem) {
-        NodeList childNodes = currentItem.getChildNodes();
+    public Channel(Node channalNode) {
+        NodeList childNodes = channalNode.getChildNodes();
         for (int i = 0; i < childNodes.getLength(); i++) {
             Node current = childNodes.item(i);
             switch (current.getNodeName().toString()) {
@@ -41,8 +46,9 @@ public class Item {
                 setLink(current.getTextContent());
                 break;
 
-            case "pubDate":
-                setPubDate(current.getTextContent());
+            case "item":
+                Item item = new Item(current);
+                getItems().add(item);
                 break;
             default:
                 // do nothing.
@@ -56,8 +62,22 @@ public class Item {
      */
     @Override
     public String toString() {
-        return "Item{title:" + getTitle() + ", link:" + getLink() + ", description:" + getDescription() + ", pubDate:"
-                + getPubDate() + "}";
+        return "Channel{title:" + getTitle() + ", link:" + getLink() + ", description:" + getDescription() + "}";
+    }
+
+    /**
+     * @return the tagName
+     */
+    public static String getTagName() {
+        return tagName;
+    }
+
+    /**
+     * @param tagName
+     *            the tagName to set
+     */
+    public static void setTagName(String tagName) {
+        Channel.tagName = tagName;
     }
 
     /**
@@ -106,18 +126,18 @@ public class Item {
     }
 
     /**
-     * @return the pubDate
+     * @return the items
      */
-    public String getPubDate() {
-        return pubDate;
+    public List<Item> getItems() {
+        return items;
     }
 
     /**
-     * @param pubDate
-     *            the pubDate to set
+     * @param items
+     *            the items to set
      */
-    public void setPubDate(String pubDate) {
-        this.pubDate = pubDate;
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
 }

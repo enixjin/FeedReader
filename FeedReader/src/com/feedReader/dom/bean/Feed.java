@@ -3,10 +3,11 @@
  * Create date: Oct 28, 2013
  * Create by: enixjin
  */
-package com.feedReader.bean;
+package com.feedReader.dom.bean;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -40,7 +41,9 @@ public class Feed {
     public void parse() throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
+        System.out.println(new Date() + "--- start read from URL");
         Document feedDom = builder.parse(getURL());
+        System.out.println(new Date() + "--- end read from URL");
         NodeList channelList = feedDom.getElementsByTagName(Channel.tagName);
         for (int i = 0; i < channelList.getLength(); i++) {
             Node channelNode = channelList.item(i);
